@@ -74,7 +74,7 @@ button
     height: 100px;
     background-color: transparent;
     border: 0px;
-    animation: mymove 5ms infinite;
+    animation: mymove 5s infinite;
 }
 
 

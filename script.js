@@ -88,8 +88,7 @@ function setarr(id,value)
 function reset()
 {
     const buttons=["0,0","0,1","0,2","1,0","1,1","1,2","2,0","2,1","2,2"];
-    if(gamewinner!="")
-    {
+    
         arr=[[0,0,0],[0,0,0],[0,0,0]];
         gamewinner="";
         turnof=Math.floor(Math.random() * 2);
@@ -99,5 +98,4 @@ function reset()
             document.getElementById(element).innerHTML="<img src=\"\" alt=\"\">";
         });
         turnofplayer();
-    }
 }

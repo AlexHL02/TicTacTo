@@ -48,8 +48,9 @@ function aimove(bor)
 
 function minimax(bor)
 {
-    if(allset(bor))
+    if(allset(bor)||winner(bor))
     {
+        let score=scoreboard(bor);
         return score;
     }
 }

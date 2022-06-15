@@ -22,50 +22,74 @@ function setimg(id)
                 setarr(id,2);
 
             }
-            var win= winner(turnof, arr);
+            var win= winner(arr);
             if(win)
-            {    
+            {
+                let score=scoreboard(arr);
+                console.log(score);    
                 playerWinner(turnof);
+            }else if(allset(arr))
+            {
+                let score=scoreboard(arr);
+                console.log(score);
             }
+            
             turnof=1-turnof;
             turnofplayer(turnof);
         }
-        minimax(arr);
+        //minimax(arr);
     }
 }
 
 function aimove(bor)
 {
-    let bestscore=Infinity;
-    let bestmove;
-
-    for(let i=0;i<3;i++)
-    {
-        for(let j=0;j<3;j++)
-        {
-            if(bor[i][j]==0)
-            {
-                bor[i][j]=2;
-                let score=minmax(bor);
-                if(score<bestscore)
-                {
-                    bestscore=score;
-                    bestmove=[i,j];
-                }
-            }
-        }
-    }
-    return bestmove;
+    
 }
 
 function minimax(bor)
 {
-    let maxscore;
     if(allset(bor))
     {
-        return maxscore;
+        return score;
     }
 }
+
+function scoreboard(board)
+{
+    let score;
+    for (let i = 0; i < 3; i++) {
+        if ((1==board[i][1]&&1==board[i][2]&&1==board[i][0])
+        ||  (1==board[1][i]&&1==board[2][i]&&1==board[0][i]))
+        {
+            return score=1;
+        }
+        
+        if ((2==board[i][1]&&2==board[i][2]&&2==board[i][0])
+        ||  (2==board[1][i]&&2==board[2][i]&&2==board[0][i]))
+        {
+           return score=-1;
+        }
+    }
+
+    if((board[0][0]==1&&1==board[1][1]&&1==board[2][2])
+    || (board[0][2]==1&&1==board[1][1]&&1==board[2][0]) )
+    {
+       return score=1;
+    }
+     
+    if((2==board[1][1]&&2==board[2][2]&&2==board[0][0])
+    || (2==board[1][1]&&2==board[2][0]&&2==board[0][2]))
+    {
+       return score=-1;
+    }
+    if(allset(board))
+    {
+        score=0;
+    }
+
+    return score;
+}
+
 
 function allset(bor)
 {
@@ -107,7 +131,7 @@ function turnofplayer(turnplayer)
 }
 
 
-function winner(Player,board) 
+function winner(board) 
 {
     // arr[a][0]!=0&&arr[a][0]===arr[a][1]&&a[a][2]===arr[a][3] gewinner
         for (let i = 0; i < arr.length; i++) {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <title>TicTacTo</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <main>
+            <article>
+                <!--nur eine sektion nötig in class section grip-gap ändern  367px-->
+                    <section>
+                        <button onclick="setimg(id)" id="0,0" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="0,1" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="0,2" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="1,0" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="1,1" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="1,2" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="2,0" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="2,1" title="test" type="button"><img src="" alt=""></button>
+                        <button onclick="setimg(id)" id="2,2" title="test" type="button"><img src="" alt=""></button>
+                    </section>
+            </article>
+        </main>
+        <div>
+            <p id="sieger1" class="sieger"></p>
+            <p class="spieler1_name">Spieler 1: X</p>
+            <p id="p1" class="turn"></p>
+            <p id="sieger2" class="sieger"></p>
+            <p class="spieler2_name">Spieler 2: O</p>
+            <p id="p2" class="turn"></p>
+            <button class="restart" type="button" onclick="reset()">Restart</button>
+        </div>
+        
+        <script src="logic.js"></script>
+    </body>
+</html>

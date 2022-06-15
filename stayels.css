@@ -1,0 +1,112 @@
+main{
+    text-align: center;
+    width: 490px;
+    height: 500px;
+    margin: 0 0 0 30%;
+    background-image:url(tictacto.png);
+    background-repeat: no-repeat;
+    float: left;
+}
+
+article
+{
+    margin-top:6%;
+    display: inline-grid;
+    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 60px;
+    
+}
+
+div
+{
+    float: left;
+    margin-top: 0%;
+    padding-top: 10%;
+    margin-left: 5%;
+    font-family: 'Comic Sans MS';
+    font-size: 12pt;
+}
+
+.spieler1_name
+{
+    margin-top: 0%;
+    margin-bottom: 50%;
+    float: left;
+}
+
+.spieler2_name
+{
+    margin-top: 0%;
+    margin-bottom: 10%;
+    float: left;
+}
+
+.turn
+{
+    color: red;
+    font-size: 12pt;
+    margin-top: 0%;
+    margin-left: 5px;
+    display: inline;
+    float: left;
+}
+
+.sieger
+{
+    clear: both;
+    text-align: center;
+    margin: 0%;
+    font-size: 13pt;
+    color: gold;
+}
+
+section
+{
+    display: inline-grid;
+    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 100px 100px 100px;
+    grid-gap: 60px;
+}
+button
+{
+    width: 100px; 
+    height: 100px;
+    background-color: transparent;
+    border: 0px;
+    animation: mymove 5ms infinite;
+}
+
+
+section button:hover
+{
+    background-color: #008CBA;
+    
+}
+.restart:hover
+{
+    background-color: #008CBA;
+    animation: 0ms;
+}
+
+.restart
+{
+    display: block;
+    margin: 0 auto;
+    clear: both;
+    width: 100px;
+    height: 50px;
+    animation: 0ms;
+
+}
+
+
+@keyframes mymove
+{
+    100%{background-color: transparent;}
+    80% {background-color: rgba(0, 255, 0, 0.475);}
+    70%{background-color: rgba(255, 0, 0, 0.475);}
+    50%{background-color: rgba(0, 0, 255, 0.475);}
+    25%{background-color: rgba(255, 0, 255, 0.475);}
+    0%{background-color: transparent;}
+}   

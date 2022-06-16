@@ -1,4 +1,4 @@
-var turnof=0;//Math.floor(Math.random() * 2);
+var turnof=Math.floor(Math.random() * 2);
 let arr=[[0,0,0],[0,0,0],[0,0,0]]
 var gamewinner="";
 // human 0 s:x maximaising; AI 1 s:o minimasing;
@@ -29,7 +29,10 @@ function setimg(id)
             //    console.log(score);    
                 playerWinner(turnof);
             }
-            
+            if(allset(arr))
+            {
+                playerWinner(-1);
+            }
             turnof=1-turnof;
             turnofplayer(turnof);
         }
@@ -37,10 +40,10 @@ function setimg(id)
     }
 }
 
-function aimove()
+function aimove(minormax)
 {
     var board=arr;
-    var bestmove=Infinity;
+    bestmove=Infinity;
     var Bmove;
     for(let i=0;i<3;i++)
     {
@@ -51,14 +54,11 @@ function aimove()
                 board[i][j]=2;
                 let move=minimax(true,board);
                 console.log(move+" "+i+","+j)
-                if(move==-1)
+                if(move<bestmove)
                 {
-                    console.log("test"); 
+                    bestmove=move;
                     Bmove=[i,j];
-                }else if(move==0)
-                {
-                    Bmove=[i,j];
-                } 
+                }
                 board[i][j]=0;
             }
         }
@@ -229,10 +229,16 @@ function playerWinner(Player)
         document.getElementById("sieger1").innerHTML=winner;
         gamewinner="Player_1";
     }
-    else
+    if(Player==1)
     {
         document.getElementById("sieger2").innerHTML=winner;
         gamewinner="Player_2";
+    }
+    if(Player==-1)
+    {
+        document.getElementById("sieger1").innerHTML="Unentschieden";
+        document.getElementById("sieger2").innerHTML="Unentschieden";
+        gamewinner="Unentschieden";
     }
 }
 
@@ -242,7 +248,7 @@ function reset()
     
         arr=[[0,0,0],[0,0,0],[0,0,0]];
         gamewinner="";
-        turnof=0//Math.floor(Math.random() * 2);
+        turnof=Math.floor(Math.random() * 2);
         document.getElementById("sieger1").innerHTML="";
         document.getElementById("sieger2").innerHTML="";
         buttons.forEach(element => {

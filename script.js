@@ -1,4 +1,4 @@
-var turnof=Math.floor(Math.random() * 2);
+var turnof=0;//Math.floor(Math.random() * 2);
 let arr=[[0,0,0],[0,0,0],[0,0,0]]
 var gamewinner="";
 // human 0 s:x maximaising; AI 1 s:o minimasing;
@@ -7,7 +7,6 @@ turnofplayer(turnof);
 
 function setimg(id)
 {
-    
     if(gamewinner=="")
     {
         var x="<img src=\"x.png\" alt=\"\" height=\"90px\" width=\"90px\">"
@@ -22,16 +21,13 @@ function setimg(id)
                 setarr(id,2);
 
             }
+            
             var win= winner(arr);
             if(win)
             {
-                let score=scoreboard(arr);
-                console.log(score);    
+            //    let score=scoreboard(arr);
+            //    console.log(score);    
                 playerWinner(turnof);
-            }else if(allset(arr))
-            {
-                let score=scoreboard(arr);
-                console.log(score);
             }
             
             turnof=1-turnof;
@@ -41,17 +37,87 @@ function setimg(id)
     }
 }
 
-function aimove(bor)
+function aimove()
 {
-    
+    var board=arr;
+    var bestmove=Infinity;
+    var Bmove;
+    for(let i=0;i<3;i++)
+    {
+        for(let j=0;j<3;j++)
+        {
+            if(board[i][j]==0)
+            {
+                board[i][j]=2;
+                let move=minimax(true,board);
+                console.log(move+" "+i+","+j)
+                if(move==-1)
+                {
+                    console.log("test"); 
+                    Bmove=[i,j];
+                }else if(move==0)
+                {
+                    Bmove=[i,j];
+                } 
+                board[i][j]=0;
+            }
+        }
+    }
+    console.log(Bmove);
+    return Bmove;
 }
 
-function minimax(bor)
+function minimax(ismaxi, bor2)
 {
-    if(allset(bor)||winner(bor))
+    var bor3=bor2;
+    let best;
+    if(allset(bor3)||winner(bor3))
     {
-        let score=scoreboard(bor);
+        let score=scoreboard(bor3);
         return score;
+    }
+
+    if(ismaxi)
+    {
+        best=-Infinity;
+        for(let i=0;i<3;i++)
+        {
+            for(let j=0;j<3;j++)
+            {
+                if(bor3[i][j]==0)
+                {
+                    bor3[i][j]=1;
+                    let score= minimax(false,bor3);
+                    bor3[i][j]=0;
+                    if(score>best)
+                    {
+                        best= score;
+                    }
+                }
+            }
+        }
+        return best;
+    }
+    else
+    {
+        best=Infinity;
+        for(let i=0;i<3;i++)
+        {
+            for(let j=0;j<3;j++)
+            {
+                if(bor3[i][j]==0)
+                {
+                    bor3[i][j]=2;
+                    let score=minimax(true,bor3);
+                    bor3[i][j]=0;
+                    if(score<best)
+                    {
+                        best = score;
+                    }
+                }
+            }
+        }
+        return best;
     }
 }
 
@@ -92,15 +158,13 @@ function scoreboard(board)
 }
 
 
-function allset(bor)
+function allset(bor4)
 {
-    var a=0;
-
     for(let i=0;i<3;i++)
     {
         for(let j=0;j<3;j++)
         {
-                if(bor[i][j]==0)
+                if(bor4[i][j]==0)
                 {
                     return false;
                 }
@@ -121,8 +185,8 @@ function turnofplayer(turnplayer)
     if (turnplayer==1) {
         document.getElementById("p2").innerHTML="\<\<";
         document.getElementById("p1").innerHTML="";
-        //let a=aimove(arr);
-        //setimg(a[0]+","+a[1])
+        let a=aimove();
+        setimg(a[0]+","+a[1])
     }
     else
     {
@@ -178,7 +242,7 @@ function reset()
     
         arr=[[0,0,0],[0,0,0],[0,0,0]];
         gamewinner="";
-        turnof=Math.floor(Math.random() * 2);
+        turnof=0//Math.floor(Math.random() * 2);
         document.getElementById("sieger1").innerHTML="";
         document.getElementById("sieger2").innerHTML="";
         buttons.forEach(element => {

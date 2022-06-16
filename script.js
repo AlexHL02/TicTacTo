@@ -205,6 +205,7 @@ function turnofplayer(turnplayer)
     if (turnplayer==1) {
         document.getElementById("p2").innerHTML="\<\<";
         document.getElementById("p1").innerHTML="";
+        delay
         let a=aimove(true);
         setimg(a[0]+","+a[1]);
     }

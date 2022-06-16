@@ -43,7 +43,14 @@ function setimg(id)
 function aimove(minormax)
 {
     var board=arr;
-    bestmove=Infinity;
+    if(minormax)
+    {
+        bestmove=Infinity;
+    }else
+    {
+        bestmove=-Infinity;
+    }
+    
     var Bmove;
     for(let i=0;i<3;i++)
     {
@@ -51,14 +58,27 @@ function aimove(minormax)
         {
             if(board[i][j]==0)
             {
-                board[i][j]=2;
-                let move=minimax(true,board);
-                console.log(move+" "+i+","+j)
-                if(move<bestmove)
+                
+                if(minormax)
                 {
-                    bestmove=move;
-                    Bmove=[i,j];
+                    board[i][j]=2;
+                    let move=minimax(minormax,board);
+                    if(move<bestmove)
+                    {
+                        bestmove=move;
+                        Bmove=[i,j];
+                    } 
+                }else
+                {
+                    board[i][j]=1;
+                    let move=minimax(minormax,board);
+                    if(move>bestmove)
+                    {
+                        bestmove=move;
+                        Bmove=[i,j];
+                    }
                 }
+                
                 board[i][j]=0;
             }
         }
@@ -185,13 +205,15 @@ function turnofplayer(turnplayer)
     if (turnplayer==1) {
         document.getElementById("p2").innerHTML="\<\<";
         document.getElementById("p1").innerHTML="";
-        let a=aimove();
-        setimg(a[0]+","+a[1])
+        let a=aimove(true);
+        setimg(a[0]+","+a[1]);
     }
     else
     {
         document.getElementById("p1").innerHTML="\<\<";
         document.getElementById("p2").innerHTML="";
+        //let a=aimove(false);
+        //setimg(a[0]+","+a[1]);
     }
 }
 
